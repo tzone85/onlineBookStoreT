@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2>Order History</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>ISBN</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{order.createdAt | date:'medium'}}</td>
+          <td>{{order.isbn}}</td>
+          <td>{{order.quantity}}</td>
+          <td>${{order.totalPrice}}</td>
+          <td><span class="badge" [ngClass]="getStatusClass(order.status)">{{order.status}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
