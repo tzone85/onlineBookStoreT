@@ -1,82 +1,107 @@
 # Online Book Store
 
-A simple online book store application built with Angular, Node.js, and MongoDB.
+A full-stack web application for managing an online book store, built with Angular (frontend) and Node.js/Express (backend) with MongoDB Atlas as the database.
 
 ## Features
 
-- View available books
-- Place book orders
-- View order history
-- Basic authentication
-- RESTful API
+- Browse books with pagination (10 books per page)
+- View book details (title, author, ISBN, price, stock)
+- Place orders for books
+- Admin authentication for API access
+- RESTful API architecture
+- Modern, responsive UI with Bootstrap
 
 ## Tech Stack
 
-- Frontend: Angular 16
-- Backend: Node.js with Express
-- Database: MongoDB
-- Authentication: Basic Auth
-- Deployment: AWS Free Tier
+### Frontend
+- Angular 16+
+- Bootstrap 5
+- TypeScript
+- RxJS for state management
 
-## Project Structure
+### Backend
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose ODM
+- JWT for authentication
+- Basic Auth for API protection
 
+## Getting Started
+
+### Prerequisites
+- Node.js 14+ installed
+- MongoDB Atlas account
+- Git
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/tzone85/onlineBookStoreT.git
+cd onlineBookStoreT
 ```
-.
-├── backend/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── frontend/
-│   └── src/
-│       ├── app/
-│       │   ├── components/
-│       │   └── services/
-│       └── ...
-└── README.md
+
+2. Install backend dependencies:
+```bash
+cd backend
+npm install
 ```
 
-## Setup Instructions
+3. Install frontend dependencies:
+```bash
+cd ../frontend
+npm install
+```
 
-1. Backend Setup:
-   ```bash
-   cd backend
-   npm install
-   # Create .env file from .env.example
-   npm start
-   ```
+4. Create a `.env` file in the backend directory with your configuration:
+```env
+MONGODB_URI=your_mongodb_connection_string
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+JWT_SECRET=your_jwt_secret
+```
 
-2. Frontend Setup:
-   ```bash
-   cd frontend
-   npm install
-   ng serve
-   ```
+### Running the Application
 
-3. Access the application:
-   - Frontend: http://localhost:4200
-   - Backend API: http://localhost:3000
+1. Start the backend server:
+```bash
+cd backend
+node server.js
+```
+
+2. Start the frontend development server:
+```bash
+cd frontend
+ng serve --port 4204
+```
+
+3. Access the application at `http://localhost:4204`
+
+### Seeding Sample Data
+
+To populate the database with sample books:
+```bash
+cd backend/scripts
+node seed.js
+```
+
+This will create 100 sample books in the database.
 
 ## API Endpoints
 
-- GET /api/books - Get all books
-- POST /api/orders - Create a new order
-- GET /api/orders - Get all orders
+- `GET /api/books?page=1&limit=10` - Get paginated list of books
+- `POST /api/orders` - Create a new order
+- `GET /api/orders` - Get list of orders
 
-## Authentication
+## Contributing
 
-The API uses Basic Authentication:
-- Username: admin
-- Password: admin123
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## AWS Deployment
+## License
 
-The application is deployed on AWS Free Tier using:
-- EC2 instance for hosting
-- MongoDB Atlas for database
-
-## Development
-
-1. Clone the repository
-2. Install dependencies for both frontend and backend
-3. Set up environment variables
-4. Run the development servers
+This project is licensed under the MIT License - see the LICENSE file for details.
