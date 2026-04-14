@@ -4,3 +4,9 @@ node_modules/
 dist/
 coverage/
 .angular/
+
+# VXD agent artifacts (auto-added)
+CLAUDE.md
+.vxd-prompts/
+.serena/
+firebase-debug.log
