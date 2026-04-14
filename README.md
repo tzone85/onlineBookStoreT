@@ -78,6 +78,61 @@ ng serve --port 4204
 
 3. Access the application at `http://localhost:4204`
 
+### Approval Mode Configuration
+
+The application supports different approval modes for order processing via the `--approval-mode` command-line argument:
+
+#### Syntax
+```bash
+node backend/server.js --approval-mode <mode>
+```
+
+#### Available Modes
+
+| Mode | Description | Order Behavior | Stock Updates | Use Case |
+|------|-------------|----------------|---------------|----------|
+| `auto` | Automatic approval (default) | Orders completed immediately | Stock updated on creation | Development, low-risk environments |
+| `manual` | Manual approval required | Orders stay pending | Stock updated on approval | Standard production environments |
+| `strict` | Strict manual approval | Orders require admin approval | Stock updated only after admin approval | High-security environments |
+
+#### Examples
+
+**Development (Auto Mode - Default)**:
+```bash
+node backend/server.js
+# or explicitly
+node backend/server.js --approval-mode auto
+```
+
+**Production (Manual Mode)**:
+```bash
+node backend/server.js --approval-mode manual
+```
+
+**High Security (Strict Mode)**:
+```bash
+node backend/server.js --approval-mode strict
+```
+
+#### Default Behavior
+- **Default Mode**: `auto` when `--approval-mode` is not specified
+- **Error Handling**: Application exits with error code 1 for invalid modes
+- **Production Warning**: Using `auto` mode in production environments triggers security warnings
+
+#### Order Management with Approval Modes
+
+**Auto Mode**: Orders are immediately completed and stock is reduced
+**Manual/Strict Modes**: Orders created as pending, use these endpoints:
+
+- **Approve Order**: `PUT /api/orders/:id/approve`
+- **Reject Order**: `PUT /api/orders/:id/reject`
+
+Example approval:
+```bash
+curl -X PUT http://localhost:3000/api/orders/ORDER_ID/approve \
+  -H "Authorization: Basic <admin_credentials>"
+```
+
 ### Seeding Sample Data
 
 To populate the database with sample books:
